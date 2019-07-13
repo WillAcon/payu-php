@@ -31,6 +31,8 @@ require_once dirname(__FILE__).'/PayU/util/PayUApiServiceUtil.php';
 
 require_once dirname(__FILE__).'/PayU/api/Environment.php';
 
+require_once dirname(__FILE__).'/PayU/PayU.php';
+
 require_once dirname(__FILE__).'/PayU/PayUBankAccounts.php';
 require_once dirname(__FILE__).'/PayU/PayUPayments.php';
 require_once dirname(__FILE__).'/PayU/PayUReports.php';
