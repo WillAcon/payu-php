@@ -4,7 +4,7 @@
 ```json
 {
   "require": {
-    "payu/payu-php": "4.5.6"
+    "willacon/payu-php": "4.5.6"
   }
 }
 ```
