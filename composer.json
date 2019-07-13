@@ -1,14 +1,13 @@
 {
     "name": "willacon/payu-php",
     "description": "Payu php",
-    "type": "composer-plugin",
+    "type": "library",
     "authors": [
         {
             "name": "williams",
-            "email": "williams.conyas@unas.edu.pe"
+            "email": "williams.conyas@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "php": ">=5.3.0"
     },
