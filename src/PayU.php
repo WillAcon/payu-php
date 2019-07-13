@@ -57,7 +57,7 @@ require_once dirname(__FILE__).'/PayU/PayURecurringBillItem.php';
  * @version 1.0.0, 20/10/2013
  *
  */
-abstract class PayU {
+ class PayU {
 	
 	/**
 	 * Api version
