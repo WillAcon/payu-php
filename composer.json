@@ -1,10 +1,20 @@
 {
     "name": "willacon/payu-php",
     "description": "Payu php",
+    "keywords": [
+        "payu",
+        "client",
+        "api",
+        "peru",
+        "php",
+        "payments",
+        "pagos"
+    ],
     "type": "library",
+    "license": "MIT",
     "authors": [
         {
-            "name": "williams",
+            "name": "Williams",
             "email": "williams.conyas@gmail.com"
         }
     ],
