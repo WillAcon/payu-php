@@ -1,5 +1,5 @@
 {
-    "name": "payu/payu-php",
+    "name": "WillAcon/payu-php",
     "description": "Payu php",
     "type": "composer-plugin",
     "authors": [
