@@ -31,4 +31,6 @@ class TransactionType
 	/** Credit transaction. */
 	const CREDIT = "CREDIT";
 
+	/**  PARTIAL_CAPTURE. */
+	const PARTIAL_CAPTURE = "PARTIAL_CAPTURE";
 }

@@ -237,6 +237,19 @@ class PayUPayments{
 	public static function  doAuthorization($parameters, $lang = null){
 		return PayUPayments::doPayment($parameters, TransactionType::AUTHORIZATION, $lang);
 	}
+
+	/**
+		* Do partial capture
+		*
+		* @param parameters to build the request
+		* @param string $lang language of request see SupportedLanguages class 
+		* @return The request response
+		* @throws PayUException
+		* @throws InvalidArgumentException
+		*/
+	 public static function doPartialCapture($parameters, $lang = null){
+			return PayUPayments::processTransactionAlreadyAuthorizated($parameters, TransactionType::PARTIAL_CAPTURE, $lang);
+	 }
 	
 	
 	/**

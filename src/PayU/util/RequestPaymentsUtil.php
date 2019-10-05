@@ -117,20 +117,26 @@ class RequestPaymentsUtil extends CommonRequestUtil{
 		
 		$transaction = null;
 		
+		
 		if (TransactionType::AUTHORIZATION_AND_CAPTURE == $transactionType
 		|| TransactionType::AUTHORIZATION == $transactionType) {
 			
 			$transaction = RequestPaymentsUtil::buildTransactionRequest($parameters, $lang);
+			$transaction->type = $transactionType;
 			
 		}else if (TransactionType::VOID == $transactionType
 				|| TransactionType::REFUND == $transactionType
 				|| TransactionType::CAPTURE == $transactionType) {
 			
 			$transaction = RequestPaymentsUtil::buildTransactionRequestAfterAuthorization($parameters);
+			$transaction->type = $transactionType;
 			
 		}
+		else if (TransactionType::PARTIAL_CAPTURE == $transactionType) {
+			$transaction = RequestPaymentsUtil::buildTransactionRequestAfterAuthorization($parameters,'PARTIAL_CAPTURE');
+			$transaction->type = "CAPTURE";
+		}
 
-		$transaction->type = $transactionType;
 		$request->transaction = $transaction;
 		return $request;
 		
@@ -247,7 +253,7 @@ class RequestPaymentsUtil extends CommonRequestUtil{
 	 * @param array $parameters the parameters to build a transaction
 	 * @return the transaction built
 	 */
-	private static function buildTransactionRequestAfterAuthorization($parameters){
+	private static function buildTransactionRequestAfterAuthorization($parameters ,$custom_method = null){
 		
 		$transaction = new stdClass();
 		$transaction->parentTransactionId = CommonRequestUtil::getParameter($parameters, PayUParameters::TRANSACTION_ID);
@@ -255,9 +261,21 @@ class RequestPaymentsUtil extends CommonRequestUtil{
 		
 		$order = new stdClass();
 		$order->id = CommonRequestUtil::getParameter($parameters, PayUParameters::ORDER_ID);
+
+		if ($custom_method =="PARTIAL_CAPTURE") {
+			//$order->referenceCode = CommonRequestUtil::getParameter($parameters, PayUParameters::REFERENCE_CODE);
+			$additionalValues = new stdClass();
 		
+			$additionalValues->TX_VALUE = new stdClass();
+			$additionalValues->TX_VALUE->value =CommonRequestUtil::getParameter($parameters, PayUParameters::VALUE);
+			$additionalValues->TX_VALUE->currency = CommonRequestUtil::getParameter($parameters, PayUParameters::CURRENCY);
+		}
+		$additionalValues->extraParameters=new stdClass();
+  		$additionalValues->extraParameters->installments_number=0;
+
 		$transaction->order = $order;
-		
+		$transaction->additionalValues = $additionalValues;
+
 		return $transaction;
 	}
 

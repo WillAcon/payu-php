@@ -84,10 +84,17 @@ class CommonRequestUtil{
 			
 			if(isset($required)){
 				foreach ($required as $r){
-					if (!array_key_exists($r,$parameters)
-					|| (empty($parameters[$r]) && $parameters[$r] !== FALSE)) {
-						$errorMessage = "Parameter [" . $r ."] is required.";
-						$isError = true;
+					if ($r == 'installmentsNumber') {
+						if (!array_key_exists($r,$parameters) || (empty($parameters[$r]) && $parameters[$r] !== FALSE && $parameters[$r] !='0' )) {
+							$errorMessage = "Parameter [" . $r ."] is required.";
+							$isError = true;
+						}
+					}
+					else{
+						if (!array_key_exists($r,$parameters) || (empty($parameters[$r]) && $parameters[$r] !== FALSE)) {
+							$errorMessage = "Parameter [" . $r ."] is required.";
+							$isError = true;
+						}
 					}
 				}
 			}
